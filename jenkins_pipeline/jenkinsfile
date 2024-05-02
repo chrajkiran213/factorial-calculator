@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'mvn clean package'
-        docker build -t awesome-app .
+        docker build -t factorial-calculator .
       }
     }
   }
