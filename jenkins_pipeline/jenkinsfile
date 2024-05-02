@@ -5,7 +5,7 @@ pipeline {
       steps {
         sh 'mvn clean package'
         docker build -t factorial-calculator .
-      }
+          }
     }
   }
 }
