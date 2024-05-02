@@ -1,11 +1,21 @@
+
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        sh 'mvn clean package'
-        docker build -t factorial-calculator .
-          }
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'factorial-calculator'
+        KUBE_NAMESPACE = 'default'
+        KUBE_DEPLOYMENT_NAME = 'factorial-calculator'
     }
-  }
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    docker.build(env.DOCKER_IMAGE)
+                }
+            }
+        }
+    }
 }
